@@ -1,9 +1,14 @@
+#BAD VERSION
+
 # FROM python:latest
 # WORKDIR /app
 # COPY . .
 
 # CMD [ "python", "app.py" ]
 
+#########################################
+
+#GOOD VERSION
 FROM python:3.12-slim
 WORKDIR /app
 COPY app.py .
