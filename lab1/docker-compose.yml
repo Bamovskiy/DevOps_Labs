@@ -1,0 +1,79 @@
+# version: "3"
+
+# services:
+#   app:
+#     build: .
+#     container_name: badAppContainer
+#     ports:
+#       - "5000:5000"
+#     volumes:
+#       - .:/app
+#     environment:
+#       - DEBUG=true
+#     depends_on:
+#       - db
+
+#   db:
+#     image: postgres:latest
+#     container_name: badDbContainer
+#     ports:
+#       - "5432:5432"
+#     environment:
+#       - POSTGRES_PASSWORD=123456
+
+##################################
+
+# version: "3.9"
+
+# services:
+#   app:
+#     build: .
+#     ports:
+#       - "5000:5000"
+#     environment:
+#       - DEBUG=false
+#     depends_on:
+#       - db
+#     networks:
+#       - app_net
+
+#   db:
+#     image: postgres:15-alpine
+#     environment:
+#       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
+#     networks:
+#       - app_net
+  
+# volumes:
+#   db_data:
+
+# networks:
+#   app_net:
+
+##################################################
+version: "3.9"
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    networks:
+      - app_net
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - db_net
+  
+volumes:
+  db_data:
+
+networks:
+  app_net:
+  db_net:
